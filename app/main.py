@@ -1,13 +1,30 @@
+from pathlib import Path
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from app.predictor import carregar_modelo, criar_entrada, prever
 from app.explainer import explicar_decisao
 from app.schemas import SaidaPredicao, EntradaPredicao
+
 
 app = FastAPI(
     title="Explainable Decision Assistant",
     version="1.0.0",
 )
 modelo = carregar_modelo()
+
+raiz_projeto = Path(__file__).resolve().parent.parent
+pasta_static = raiz_projeto / "static"
+
+app.mount(
+    "/static",
+    StaticFiles(directory=pasta_static),
+    name="static"
+)
+
+@app.get("/", include_in_schema=False)
+def frontend():
+    return FileResponse(pasta_static / "index.html")
 
 @app.get("/health")
 def health():

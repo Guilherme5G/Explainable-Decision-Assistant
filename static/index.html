@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Explainable Decision Assistant</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <main>
+        <header>
+            <p class="eyebrow">
+                ML aplicado • Decision Tree explicável
+            </p>
+
+            <h1>Explainable Decision Assistant</h1>
+
+            <p class="subtitle">
+                Explore como uma árvore de decisão transforma
+                dados de entrada em uma previsão explicável.
+                Projeto educacional baseado em dados sintéticos.
+            </p>
+
+            <p class="disclaimer">
+                Não deve ser usado para decisões financeiras reais.
+            </p>
+        </header>
+
+        <div class="workspace">
+            <form id="prediction-form">
+                <div class="form-header">
+                    <p class="section-label">Dados de entrada</p>
+                    <h2>Simular análise</h2>
+                </div>
+
+                <label for="renda">Renda</label>
+                <input
+                    id="renda"
+                    name="renda"
+                    type="number"
+                    min="0.01"
+                    step="0.01"
+                    placeholder="Ex.: 5000"
+                    required
+                >
+
+                <label for="divida">Dívida</label>
+                <input
+                    id="divida"
+                    name="divida"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    placeholder="Ex.: 4500"
+                    required
+                >
+
+                <label for="numero_atrasos">
+                    Número de atrasos
+                </label>
+                <input
+                    id="numero_atrasos"
+                    name="numero_atrasos"
+                    type="number"
+                    min="0"
+                    step="1"
+                    placeholder="Ex.: 5"
+                    required
+                >
+
+                <button type="submit">
+                    Analisar cenário
+                </button>
+            </form>
+
+            <section
+                id="resultado"
+                hidden
+                aria-live="polite"
+            >
+                <p class="section-label">Saída do modelo</p>
+                <h2>Resultado da análise</h2>
+
+                <p id="classe-prevista"></p>
+
+                <div class="probabilidade">
+                    <div class="probabilidade-cabecalho">
+                        <span>Classe 0 · menor risco</span>
+                        <strong id="probabilidade-zero"></strong>
+                    </div>
+
+                    <div
+                        class="probabilidade-trilha"
+                        aria-hidden="true"
+                    >
+                        <div
+                            id="barra-zero"
+                            class="
+                                probabilidade-barra
+                                probabilidade-barra-zero
+                            "
+                        ></div>
+                    </div>
+                </div>
+
+                <div class="probabilidade">
+                    <div class="probabilidade-cabecalho">
+                        <span>Classe 1 · maior risco</span>
+                        <strong id="probabilidade-um"></strong>
+                    </div>
+
+                    <div
+                        class="probabilidade-trilha"
+                        aria-hidden="true"
+                    >
+                        <div
+                            id="barra-um"
+                            class="
+                                probabilidade-barra
+                                probabilidade-barra-um
+                            "
+                        ></div>
+                    </div>
+                </div>
+
+                <h3>Caminho da decisão</h3>
+                <ul id="regras-decisao"></ul>
+            </section>
+        </div>
+
+        <p
+            id="mensagem-erro"
+            role="alert"
+            hidden
+        ></p>
+
+        <footer>
+            Modelo educacional com dados sintéticos.
+            Imagem: Pawel Czerwinski via Unsplash.
+        </footer>
+    </main>
+
+    <script src="/static/app.js" defer></script>
+</body>
+</html>
